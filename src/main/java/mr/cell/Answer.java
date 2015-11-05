@@ -10,6 +10,7 @@ public class Answer {
 	
 	public Answer(int httpStatus) {
 		this.httpStatus = httpStatus;
+		this.body = "";
 	}
 	
 	public Answer(int httpStatus, String body) {

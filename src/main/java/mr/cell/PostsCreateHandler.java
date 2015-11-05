@@ -10,7 +10,7 @@ import mr.cell.domain.NewPostPayload;
 public class PostsCreateHandler extends AbstractRequestHandler<NewPostPayload> {
 
 	private PostDao dao;
-	
+
 	public PostsCreateHandler(PostDao dao) {
 		super(NewPostPayload.class);
 		this.dao = dao;

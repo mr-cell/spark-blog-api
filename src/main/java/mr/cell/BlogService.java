@@ -13,7 +13,6 @@ import spark.Response;
 import mr.cell.dao.PostDao;
 import mr.cell.dao.Sql2oPostDao;
 import mr.cell.domain.NewCommentPayload;
-import mr.cell.domain.NewPostPayload;
 import mr.cell.json.JsonMapper;
 
 /**
@@ -102,23 +101,5 @@ public class BlogService {
     		res.status(HTTP_BAD_REQUEST);
     		return "";
     	}
-	}
-	
-	private Object createNewPost(Request req, Response res) {
-		try {
-    		NewPostPayload creation = mapper.jsonToData(req.body(), NewPostPayload.class);
-    		if(!creation.isValid()) {
-    			res.status(HTTP_BAD_REQUEST);
-    			return "";
-    		}
-    		
-    		UUID uuid = dao.createPost(creation);
-    		res.status(HTTP_OK);
-    		res.type(TYPE_JSON);
-    		return mapper.dataToJson(uuid, true);        		
-    	} catch(IOException e) {
-			res.status(HTTP_BAD_REQUEST);
-			return "";
-		}
 	}
 }
