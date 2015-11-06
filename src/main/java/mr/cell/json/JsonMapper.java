@@ -11,18 +11,34 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 public class JsonMapper {
 
-	public <T> T jsonToData(String json, Class<T> dataType) throws JsonParseException, JsonMappingException, IOException {
-		ObjectMapper mapper = new ObjectMapper();
-		return mapper.readValue(json, dataType);
+	public <T> T jsonToData(String json, Class<T> dataType) throws AppJsonParseException, AppJsonMappingException, IOException {
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			return mapper.readValue(json, dataType);
+		} catch (JsonParseException e) {
+			throw new AppJsonParseException(e.getMessage(), e);
+		} catch (JsonMappingException e) {
+			throw new AppJsonMappingException(e.getMessage(), e);
+		}
 	}
 	
-	public String dataToJson(Object data, boolean prettify) throws JsonMappingException, JsonGenerationException, IOException {
+	public String dataToJson(Object data) throws AppJsonMappingException, AppJsonGenerationException, IOException {
+		return dataToJson(data, false);
+	}
+	
+	public String dataToJson(Object data, boolean prettify) throws AppJsonMappingException, AppJsonGenerationException, IOException {
 		StringWriter sw = new StringWriter();
 		ObjectMapper mapper = new ObjectMapper();
 		if(prettify) {
 			mapper.enable(SerializationFeature.INDENT_OUTPUT);
 		}
-    	mapper.writeValue(sw, data);
-    	return sw.toString();        	
+		try {
+			mapper.writeValue(sw, data);
+			return sw.toString();
+		} catch (JsonMappingException e) {
+			throw new AppJsonMappingException(e.getMessage(), e);
+		} catch (JsonGenerationException e) {
+			throw new AppJsonGenerationException(e.getMessage(), e);
+		}
 	}
 }

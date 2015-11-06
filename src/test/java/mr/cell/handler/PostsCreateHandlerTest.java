@@ -1,4 +1,4 @@
-package mr.cell;
+package mr.cell.handler;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -11,11 +11,10 @@ import java.util.Collections;
 import java.util.UUID;
 
 import org.junit.Test;
-
 import org.easymock.EasyMock;
 
 import mr.cell.dao.PostDao;
-import mr.cell.domain.NewPostPayload;
+import mr.cell.payload.NewPostPayload;
 
 public class PostsCreateHandlerTest {
 	

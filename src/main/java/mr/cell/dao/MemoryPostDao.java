@@ -7,9 +7,9 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import mr.cell.domain.Comment;
-import mr.cell.domain.NewCommentPayload;
-import mr.cell.domain.NewPostPayload;
 import mr.cell.domain.Post;
+import mr.cell.payload.NewCommentPayload;
+import mr.cell.payload.NewPostPayload;
 import mr.cell.uuid.RandomUuidGenerator;
 import mr.cell.uuid.UuidGenerator;
 
