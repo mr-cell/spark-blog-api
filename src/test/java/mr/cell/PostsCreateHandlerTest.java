@@ -40,20 +40,20 @@ public class PostsCreateHandlerTest {
 	}
 	
 	@Test
-    public void aValidPost_IsCorrectlyCreated() {
-        NewPostPayload newPost = new NewPostPayload();
-        newPost.setTitle("My new post");
-        newPost.setContent("Bla bla bla");
-        assertTrue(newPost.isValid());
+	public void aValidPost_IsCorrectlyCreated() {
+		NewPostPayload newPost = new NewPostPayload();
+		newPost.setTitle("My new post");
+		newPost.setContent("Bla bla bla");
+		assertTrue(newPost.isValid());
 
-        PostDao dao = EasyMock.createMock(PostDao.class);
-        expect(dao.createPost(newPost)).andReturn(UUID.fromString("728084e8-7c9a-4133-a9a7-f2bb491ef436"));
-        replay(dao);
+		PostDao dao = EasyMock.createMock(PostDao.class);
+		expect(dao.createPost(newPost)).andReturn(UUID.fromString("728084e8-7c9a-4133-a9a7-f2bb491ef436"));
+		replay(dao);
 
-        PostsCreateHandler handler = new PostsCreateHandler(dao);
-        assertEquals(new Answer(200, "\"728084e8-7c9a-4133-a9a7-f2bb491ef436\""), handler.process(newPost, Collections.emptyMap(), false));
+		PostsCreateHandler handler = new PostsCreateHandler(dao);
+		assertEquals(new Answer(200, "\"728084e8-7c9a-4133-a9a7-f2bb491ef436\""), handler.process(newPost, Collections.emptyMap(), false));
 
-        verify(dao);
-    }
+		verify(dao);
+	}
 
 }
